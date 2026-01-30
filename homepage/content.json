@@ -1,0 +1,80 @@
+{
+  "basics": {
+    "name": "Melanie Thibodeau",
+    "tagline": "Software & Systems Engineer · Computer Vision · Defense & Aerospace",
+    "location": "Massachusetts",
+    "email": "thibodeau.melanie@email.com",
+    "links": [
+      { "label": "GitHub", "url": "https://github.com/mellythibs" },
+      { "label": "LinkedIn", "url": "https://www.linkedin.com/in/melanie-thibodeau/" }
+    ]
+  },
+  "summary": [
+    "I’m a software and systems engineer supporting compliance-driven systems in defense environments.",
+    "My background spans software development, requirements tracking, V&V, and applied computer vision research."
+  ],
+  "skills": [
+    { "name": "Python", "group": "Languages", "projectIds": ["yolov7-aug", "rule-automation"] },
+    { "name": "Java", "group": "Languages", "projectIds": ["portfolio-site"] },
+    { "name": "C/C++", "group": "Languages", "projectIds": [] },
+    { "name": "Docker", "group": "Tools", "projectIds": ["stylegan2-ada"] },
+    { "name": "YOLOv7", "group": "Tools", "projectIds": ["yolov7-aug"] },
+    { "name": "Requirements & V&V", "group": "Systems", "projectIds": ["rule-automation"] }
+  ],
+  "experience": [
+    {
+      "title": "Software & Systems Engineer",
+      "org": "Naval Undersea Warfare Center",
+      "location": "Newport, RI",
+      "dates": "2022 – Present",
+      "bullets": [
+        "Support complex software systems where traceability, documentation, and process compliance are critical.",
+        "Lead and support testing and integration across evolving baselines.",
+        "Designed a rule-based automation tool to reduce manual overhead and improve consistency."
+      ]
+    },
+    {
+      "title": "Graduate Researcher — Computer Vision",
+      "org": "UMass Dartmouth",
+      "location": "Dartmouth, MA",
+      "dates": "2024 – 2026",
+      "bullets": [
+        "Optimized medical rash datasets for object detection using YOLOv7.",
+        "Built augmentation pipelines (CLAHE, photometric transforms, elastic deformation) and evaluated model performance."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "id": "portfolio-site",
+      "name": "Virtual Portfolio",
+      "summary": "A minimal personal site with structured content and a skills-to-projects mapping.",
+      "links": [{ "label": "Repo", "url": "https://github.com/yourname/virtualportfolio" }],
+      "skills": ["JavaScript", "HTML", "CSS"]
+    },
+    {
+      "id": "yolov7-aug",
+      "name": "YOLOv7 Rash Detection — Augmentation Pipeline",
+      "summary": "Dataset curation + augmentation experiments to improve detection performance.",
+      "links": [],
+      "skills": ["Python", "YOLOv7", "OpenCV"]
+    },
+    {
+      "id": "rule-automation",
+      "name": "Rule-based Workflow Automation Tool",
+      "summary": "Automated recurring checks and structured outputs to reduce manual work.",
+      "links": [],
+      "skills": ["Python"]
+    },
+    {
+      "id": "stylegan2-ada",
+      "name": "StyleGAN2-ADA Synthetic Lesions Experiments",
+      "summary": "Early experiments generating synthetic samples for class balancing.",
+      "links": [],
+      "skills": ["Ubuntu", "Python"]
+    }
+  ],
+  "footer": {
+    "note": "Currently open to software, systems, and simulation-focused roles."
+  }
+}

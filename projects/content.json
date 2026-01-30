@@ -1,0 +1,34 @@
+{
+  "projects": [
+    {
+      "id": "portfolio-site",
+      "slug": "virtual-portfolio",
+      "name": "Virtual Portfolio",
+      "summary": "A minimal portfolio site with JSON-driven content and skill-to-project mapping.",
+      "skills": ["HTML", "JavaScript", "CSS"],
+      "github": "https://github.com/yourname/virtualportfolio",
+      "demo": {
+        "status": "planned",
+        "notes": "Demo will include screenshots + interactive sections."
+      }
+    },
+    {
+      "id": "yolov7-aug",
+      "slug": "yolov7-aug",
+      "name": "YOLOv7 Rash Detection — Augmentation Pipeline",
+      "summary": "Dataset curation + augmentation experiments to improve detection performance.",
+      "skills": ["Python", "YOLOv7", "OpenCV"],
+      "github": "",
+      "demo": { "status": "in-progress", "notes": "" }
+    },
+    {
+      "id": "rule-automation",
+      "slug": "rule-automation",
+      "name": "Rule-based Workflow Automation Tool",
+      "summary": "Automated recurring checks and structured outputs to reduce manual overhead and improve consistency.",
+      "skills": ["Python"],
+      "github": "",
+      "demo": { "status": "planned", "notes": "" }
+    }
+  ]
+}

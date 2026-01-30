@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Melanie Thibodeau | Portfolio</title>
+
+  <!-- Optional Tailwind later -->
+  <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+
+  <style>
+    body { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; margin: 0; color: #111; }
+    main { max-width: 920px; margin: 0 auto; padding: 2.5rem 1.25rem; }
+    section { margin: 2.5rem 0; }
+    h1 { font-size: 2.2rem; margin: 0 0 .25rem 0; }
+    h2 { font-size: 1.35rem; margin: 0 0 .75rem 0; border-bottom: 1px solid #ddd; padding-bottom: .25rem; }
+    .muted { color: #555; }
+    .links { display:flex; flex-wrap:wrap; gap:.5rem 1rem; list-style:none; padding:0; margin:.5rem 0 0 0; }
+    .pill { display:inline-block; border:1px solid #ddd; border-radius:999px; padding:.35rem .75rem; margin:.35rem .35rem 0 0; cursor: default; }
+    .pill[tabindex] { cursor: pointer; }
+    .grid { display:grid; gap: 1rem; }
+    @media (min-width: 720px) { .grid-2 { grid-template-columns: 1fr 1fr; } }
+    .card { border: 1px solid #ddd; border-radius: 12px; padding: 1rem; }
+    footer { border-top: 1px solid #ddd; padding-top: 1.25rem; margin-top: 2.5rem; }
+  </style>
+</head>
+
+<body>
+  <main>
+    <div id="siteNav"></div>
+
+    <!-- Header -->
+    <header>
+      <h1 id="name"></h1>
+      <p class="muted" id="tagline"></p>
+      <ul class="links muted" id="links"></ul>
+    </header>
+
+    <!-- Summary -->
+    <section>
+      <h2>Summary</h2>
+      <div id="summary"></div>
+    </section>
+
+    <!-- Skills + hover projects -->
+    <section>
+      <h2>Skills</h2>
+      <p class="muted">Hover or focus a skill to see related projects.</p>
+
+      <div class="grid grid-2">
+        <div>
+          <div id="skills"></div>
+        </div>
+
+        <aside class="card" aria-live="polite">
+          <h3 style="margin:0 0 .5rem 0;">Related Projects</h3>
+          <p class="muted" id="skillHint" style="margin:0 0 1rem 0;">
+            Pick a skill to see project matches.
+          </p>
+          <div id="relatedProjects"></div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Experience -->
+    <section>
+      <h2>Experience</h2>
+      <div id="experience"></div>
+    </section>
+
+    <!-- Footer/Contact -->
+    <footer>
+      <p id="footerNote"></p>
+      <p class="muted">Best way to reach me: <a id="emailLink" href="#"></a></p>
+    </footer>
+
+
+  </main>
+
+  <script src="./app.js"></script>
+</body>
+</html>
