@@ -1,12 +1,20 @@
 <!doctype html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta http-equiv="refresh" content="0; url=/homepage/" />
-    <link rel="canonical" href="/homepage/" />
     <title>Redirecting…</title>
+
+    <script>
+      // Redirect ONLY if we're at the site root
+      if (window.location.pathname === "/" || window.location.pathname === "/index.html") {
+        window.location.replace("/homepage/");
+      }
+    </script>
   </head>
+
   <body>
-    <p>Redirecting to <a href="/homepage/">Home</a>…</p>
+    <p>
+      Redirecting to <a href="/homepage/">Home</a>…
+    </p>
   </body>
 </html>
