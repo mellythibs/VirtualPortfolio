@@ -7,21 +7,24 @@
 
   <link rel="stylesheet" href="/dist/styles.css">
   <nav class="fixed left-6 top-24 w-44 z-50" aria-label="Main navigation">
-    <ul class="flex flex-col gap-3">
-      <li><a href="/homepage/" class="nav-btn">Home</a></li>
-      <li><a href="/projects/" class="nav-btn">Projects</a></li>
-      <li><a href="/blog/" class="nav-btn">Blog</a></li>
-      <li>
-        <a href="/assets/Resume.pdf"
-          target="_blank"
-          class="nav-btn">
-          View Resume
-        </a>
-      </li>
-    </ul>
+  <ul class="flex flex-col gap-3">
+    <li><a href="/homepage/" class="nav-btn">Home</a></li>
+    <li><a href="/projects/" class="nav-btn">Projects</a></li>
+    <li><a href="/blog/" class="nav-btn">Blog</a></li>
+    <li>
+      <a href="/assets/Resume.pdf"
+        target="_blank"
+        class="nav-btn">
+        View Resume
+      </a>
+    </li>
+
+  </ul>
   </nav>
 
-  <style>
+  <link rel="stylesheet" href="/dist/styles.css">
+  <link rel="stylesheet" href="./project_css.css">
+<style>
     body { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; margin: 0; color: #111; }
     main { max-width: 920px; margin: 0 auto; padding: 2.5rem 1.25rem; }
     header { margin-bottom: 1.5rem; }
@@ -40,31 +43,50 @@
 
 <body>
   <main>
-    <header>
-      <div id="siteNav"></div>
+    
+<header class="projects-page-header">
+  <div id="siteNav"></div>
 
+  <div class="projects-header">
+    <div class="projects-title">
       <h1>Projects</h1>
       <p class="muted">Browse projects and filter by skill.</p>
-      <nav class="row">
-        <a href="/homepage/index.html">Home</a>
-      </nav>
-    </header>
+    </div>
 
-    <!-- Controls -->
-    <section class="row" aria-label="Project filters">
-      <input id="searchInput" type="search" placeholder="Search projects..." />
-      <button id="clearBtn" type="button">Clear</button>
-    </section>
+    <div class="projects-header-controls" aria-label="Project search and filters">
+      <div class="projects-search">
+        <input id="searchInput" type="search" placeholder="Search projects..." />
+        <button id="clearBtn" type="button">Clear</button>
+      </div>
 
-    <section style="margin-top:1rem;">
-      <div class="muted" style="margin-bottom:.5rem;">Filter by skill:</div>
-      <div id="skillFilters" class="row"></div>
-    </section>
+      <div class="skills-dropdown" id="skillsDropdown">
+        <button id="skillsBtn" type="button" class="skills-btn" aria-haspopup="true" aria-expanded="false">
+          Filter skills <span aria-hidden="true">▾</span>
+        </button>
 
-    <!-- Results -->
+        <div id="skillsPanel" class="skills-panel" role="dialog" aria-label="Skill filters" hidden>
+          <div class="skills-panel-header">
+            <div class="muted">Select skills (OR logic)</div>
+          </div>
+
+          <div id="skillsList" class="skills-list" aria-label="Skills list"></div>
+
+          <div class="skills-actions">
+            <button id="skillsResetBtn" type="button">Reset</button>
+            <button id="skillsApplyBtn" type="button">Apply</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="muted projects-helptext" id="activeFiltersText"></div>
+</header>
+<!-- Results -->
     <section style="margin-top:1.5rem;">
       <div class="muted" id="resultsMeta"></div>
       <div id="projectsList"></div>
+      <div id="pagination" class="pagination" aria-label="Pagination controls"></div>
     </section>
   </main>
 

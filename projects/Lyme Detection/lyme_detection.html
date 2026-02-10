@@ -1,0 +1,79 @@
+  <style>
+    body { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; margin: 0; color: #111; }
+    main { max-width: 920px; margin: 0 auto; padding: 2.5rem 1.25rem; }
+    header { margin-bottom: 1.5rem; }
+    h1 { margin: 0 0 .25rem 0; font-size: 2rem; }
+    .muted { color: #555; }
+    .row { display: flex; gap: .75rem; flex-wrap: wrap; align-items: center; }
+    .pill { display:inline-block; border:1px solid #ddd; border-radius:999px; padding:.35rem .75rem; cursor:pointer; user-select:none; }
+    .pill[aria-pressed="true"] { border-color: #999; }
+    .card { border:1px solid #ddd; border-radius: 12px; padding: 1rem; margin: 1rem 0; }
+    .card h2 { margin: 0 0 .25rem 0; font-size: 1.1rem; }
+    .links a { margin-right: .75rem; }
+    input { padding: .5rem .6rem; border: 1px solid #ddd; border-radius: 8px; }
+    button { padding: .5rem .7rem; border: 1px solid #ddd; border-radius: 8px; background: #fff; cursor: pointer; }
+  </style>
+</head>
+
+<main class="max-w-4xl mx-auto px-6 py-10 text-center">
+  <h1 class="text-3xl font-bold mb-4">
+    Lyme Disease Rash Detection
+  </h1>
+
+  <p class="text-gray-600 mb-8 text-left">
+    This thesis focuses on optimizing image datasets through augmentation methods for the 
+    detection of Lyme disease. Lyme disease often is accompanied by an erythema migrans rash, but 
+    other types of rashes that may appear similar and have their identification mistaken.  
+    Training a model to accurately recognize subtle differences between rash types requires a 
+    large quantity of images. However, there is a lack of publicly available datasets containing Lyme 
+    disease rashes, which results in the thesis using a smaller dataset for its foundation. Using a 
+    public crowdsourced dataset, “Lyme Disease Rashes”, by Edward Zhang, the objective of this 
+    study is to improve the accuracy of YOLOv7 through image enhancements and augmentations. 
+    The study applies a combination of data preprocessing techniques, including CLAHE, 
+    photometric transformation, elastic deformation, and MixUp to improve image quality and 
+    address dataset imbalances.  
+
+    YOLOv7, an object detection model, was trained on the enhanced dataset to accurately 
+    differentiate Lyme disease-related rashes from other dermatological conditions. The results 
+    favored the CLAHE pre-processing results over the others. This work contributes to the 
+    development of more reliable, automated diagnostic tools for individual users. Results indicate 
+    a significant improvement in detection accuracy, demonstrating the potential of optimized rash 
+    datasets in the early identification of Lyme disease.
+  </p>
+
+  <!-- Thesis Actions -->
+  <section class="flex flex-wrap justify-center gap-4 mb-10">
+    <a href="/assets/Thibodeau M.G. COE MS Thesis 2026.pdf"
+       download
+       class="px-5 py-3 rounded-lg bg-black text-white font-medium">
+      Download Thesis (PDF)
+    </a>
+
+    <a href="https://library.umassd.edu/handle/XXXX"
+       target="_blank"
+       rel="noopener"
+       class="px-5 py-3 rounded-lg border font-medium">
+      View in University Library
+    </a>
+  </section>
+
+
+  <!-- Tech stack -->
+  <section class="mb-8">
+    <h2 class="text-xl font-semibold mb-3">Skills and Tools</h2>
+    <ul class="list-disc list-inside text-gray-700 inline-block text-left">
+      <li>YOLOv7</li>
+      <li>Python</li>
+      <li>PyTorch</li>
+      <li>Roboflow</li>
+    </ul>
+  </section>
+
+  <!-- Navigation -->
+  <section class="flex justify-center gap-4">
+    <a href="/projects"
+       class="px-4 py-2 rounded border">
+      Back to Projects
+    </a>
+  </section>
+</main>
