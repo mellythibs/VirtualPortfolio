@@ -1,7 +1,7 @@
 {
   "projects": [
     {
-      "id": "portfolio-site",
+      "id": "virtual-portfolio",
       "slug": "virtual-portfolio",
       "name": "Virtual Portfolio",
       "summary": "A minimal portfolio site with JSON-driven content and skill-to-project mapping.",
@@ -12,16 +12,16 @@
       ],
       "github": "https://github.com/yourname/virtualportfolio",
       "demo": {
-        "status": "planned",
+        "status": "in progress",
         "notes": "Demo will include screenshots + interactive sections."
       },
       "created": "2026-02",
       "showOnProjectsPage": true
     },
     {
-      "id": "yolov7-aug",
-      "slug": "yolov7-aug",
-      "name": "YOLOv7 Rash Detection \u2014 Augmentation Pipeline",
+      "id": "lyme-detection",
+      "slug": "lyme-detection",
+      "name": "Lyme Rash Detection",
       "summary": "Dataset curation + augmentation experiments to improve detection performance.",
       "skills": [
         "Python",
@@ -30,19 +30,35 @@
       ],
       "github": "",
       "demo": {
-        "status": "in-progress",
+        "status": "completed",
         "notes": ""
       },
       "created": "2025-11",
       "showOnProjectsPage": true
     },
     {
-      "id": "rule-automation",
-      "slug": "rule-automation",
-      "name": "Rule-based Workflow Automation Tool",
-      "summary": "Automated recurring checks and structured outputs to reduce manual overhead and improve consistency.",
+      "id": "lung-illness",
+      "slug": "lung-illness",
+      "name": "Chest X-Ray Image Preprocessing for Disease Classification",
+      "summary": "Co-authored a research study developing a Sobel- and Scharr-based edge detection preprocessing method combined with a shallow CNN to automatically identify and remove low-quality X-ray images. The approach achieved 95% accuracy and improved dataset reliability for disease classification models.",
       "skills": [
         "Python"
+      ],
+      "github": "",
+      "demo": {
+        "status": "completed",
+        "notes": ""
+      },
+      "created": "2021-10",
+      "showOnProjectsPage": true
+    },
+    {
+      "id": "virtual-pet-mini-app",
+      "slug": "virtual-pet-mini-app",
+      "name": "Virtual Pet Mini Application",
+      "summary": "Java-based interactive demo that simulates a simple virtual pet, showcasing object-oriented design and basic real-time animation logic.",
+      "skills": [
+        "Java"
       ],
       "github": "",
       "demo": {

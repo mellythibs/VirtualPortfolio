@@ -29,14 +29,27 @@ function clear(node) {
 
 function el(tag, attrs = {}, children = []) {
   const node = document.createElement(tag);
-  Object.entries(attrs).forEach(([k, v]) => {
+
+  // attributes
+  for (const [k, v] of Object.entries(attrs)) {
+    if (v == null) continue;
     if (k === "class") node.className = v;
-    else if (k === "dataset") Object.entries(v).forEach(([dk, dv]) => node.dataset[dk] = dv);
-    else if (k.startsWith("aria-")) node.setAttribute(k, v);
-    else if (k === "html") node.innerHTML = v;
+    else if (k === "style") node.setAttribute("style", v);
     else node.setAttribute(k, v);
-  });
-  children.forEach(ch => node.appendChild(typeof ch === "string" ? document.createTextNode(ch) : ch));
+  }
+
+  // children (null-safe)
+  for (const child of children.flat()) {
+    if (child == null || child === false) continue;
+
+    if (child instanceof Node) {
+      node.appendChild(child);
+    } else {
+      // strings/numbers/etc become text nodes
+      node.appendChild(document.createTextNode(String(child)));
+    }
+  }
+
   return node;
 }
 
@@ -359,11 +372,16 @@ function getPageFromUrl() {
 }
 
 function updateUrlPage(page) {
-  const params = new URLSearchParams(window.location.search);
-  params.set("page", String(page));
-  const newUrl = `${window.location.pathname}?${params.toString()}`;
-  history.replaceState({}, "", newUrl);
+  try {
+    const params = new URLSearchParams(window.location.search);
+    params.set("page", String(page));
+    const newUrl = `${window.location.pathname}?${params.toString()}`;
+    history.replaceState({}, "", newUrl);
+  } catch {
+    // ignore if History API is blocked (e.g., file://)
+  }
 }
+
 
 function goToPage(page) {
   currentPage = page;
@@ -421,14 +439,7 @@ function initSearchAndClear() {
   });
 }
 
-async function loadNav() {
-  const res = await fetch("/nav.html");
-  if (!res.ok) return;
-  $("siteNav").innerHTML = await res.text();
-}
-
 (async function init() {
-  await loadNav();
 
   initSkillsDropdown();
   initSearchAndClear();

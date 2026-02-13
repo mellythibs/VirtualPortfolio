@@ -1,0 +1,65 @@
+  <style>
+    body { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; margin: 0; color: #111; }
+    main { max-width: 920px; margin: 0 auto; padding: 2.5rem 1.25rem; }
+    header { margin-bottom: 1.5rem; }
+    h1 { margin: 0 0 .25rem 0; font-size: 2rem; }
+    .muted { color: #555; }
+    .row { display: flex; gap: .75rem; flex-wrap: wrap; align-items: center; }
+    .pill { display:inline-block; border:1px solid #ddd; border-radius:999px; padding:.35rem .75rem; cursor:pointer; user-select:none; }
+    .pill[aria-pressed="true"] { border-color: #999; }
+    .card { border:1px solid #ddd; border-radius: 12px; padding: 1rem; margin: 1rem 0; }
+    .card h2 { margin: 0 0 .25rem 0; font-size: 1.1rem; }
+    .links a { margin-right: .75rem; }
+    input { padding: .5rem .6rem; border: 1px solid #ddd; border-radius: 8px; }
+    button { padding: .5rem .7rem; border: 1px solid #ddd; border-radius: 8px; background: #fff; cursor: pointer; }
+  </style>
+</head>
+
+<main class="max-w-4xl mx-auto px-6 py-10 text-center">
+  <h1 class="text-3xl font-bold mb-4">
+    Chest X-Ray Image Preprocessing for Disease Classification
+  </h1>
+
+  <p class="text-gray-600 mb-8 text-left">
+    Research has proven that images with blur, low contrast or other deficiencies are detrimental to accuracy of classification models. 
+    Working with a dataset of blurry, hard-to-see images creates an uncertainty in whether the machine learning model is able to 
+    accurately identify objects. These hard to identify images require the use of metadata on the image to be able to truly understand 
+    and classify the image accuracy within a model. To overcome the necessity of metadata for classification of hard to identify images, 
+    we propose a method of identifying the unfit images for purposes of cleaning the dataset prior to neural network training. In our 
+    work, we use Sobel and Scharr operators-based edge detectors to produce an image with detected boundaries among the elements 
+    of the original X-Ray. The resulting images are used to train a shallow CNN to classify the image as clear or lacking in quality. 
+    Our proposed method identifies the clear, quality images with 95% accuracy and can be utilized in future disease classification 
+    models. We define the proposed approach as image preprocessing aiming to weed out infit, blurry, low/high intensity X-Rays and 
+    create a dataset suitable for disease identification.
+  </p>
+
+  <!-- Thesis Actions -->
+  <section class="flex flex-wrap justify-center gap-4 mb-10">
+    <a href="https://pdf.sciencedirectassets.com/280203/1-s2.0-S1877050921X00154/1-s2.0-S1877050921015556/main.pdf?X-Amz-Security-Token=IQoJb3JpZ2luX2VjEBgaCXVzLWVhc3QtMSJHMEUCID%2BLbeORWTUOOHGkm14z1P9Zi%2FfGHq7qNanozwFNQaNuAiEAzrORhSVAhUQV0kjb1ZOYcBnkEW0NhAmNHM6vR06SV4oquwUI4f%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAFGgwwNTkwMDM1NDY4NjUiDLGC7UJufSQ3690CdyqPBbzL84LyjdOSChrub%2FznqBp9W4W2AA6mCr4uAfd8HeTC23yR2v6ZitMVieR6xXnIP4nqmGv30PCmoP%2Fx8bsTRD1y%2Foyx4rWHBfXF9FUN5PvwW11yUlKV1DMHOAczkPV%2BUdktNOtUaK7Low2HYvSPSn6OEJI0F1YHhCv0iLJz94HMu2n6VTxt3CHGMxHVXeCmY%2F5U1sLfzAai0CSQRUZ9OJFxZm6XcLY8cchydHOtnWsV8A6IB7vPKf7a6XAcWq%2FYVv8QVQqlspvuzJaJc9bKWxMwwT%2BbvduLimDNDbfXfRixiqwJ7Ndkd4YogJPtrZpp6lgvzKcbJkJ%2FM7nTLQ%2B3eOosE8nJzm2pvsgJSWWbqnG4Dn5VTjLFL6LCKFFWehewwQNrGglqCPKYHSHnjSimMb4ehQxsdUfNr%2B6oEWDqsMIB62eXXJaUcFTVf3ToVlQM4RTmjq%2Fcv3VFTgc4vclwGgLgwbMeniCyTL8qic47b8BJb%2BqV2tQujAOyK9M9%2FzmB8yHQ443Pxh0k8TpJFQ23V1DKRPcUwoBKETkn%2FpfBNb0UOyW75Es2BnU8OH8UTGrgWQFefD2TCkbyaQX9watWTl0gp48IvXz6%2FlhcL%2B%2BSR8GXBIDhgnS2CvW%2B1Epzeag55ZOuywYFoNo88bBEe7n6bDqPvXhx8xyTaEZcwDzc9%2F47hLj70DTHAjoCY5j1jzb0OAZ%2BdCwAe%2Byxbzjun6funJ3Qbde5ZWk7t2vZraFXjXJH1pfVOL3NmOHD3UcEnmwEy0YbfmGOlWLc2otdlitiR7IclOEkrrG57Qdj4ACeWLpqJj4CXoHjWHkGR1RuQ5WTPd%2F6yrO0RGz%2FCqbvS%2FR5HKl9KzBETdyWN9tHXUKMp6Iwy8q5zAY6sQHkwkesshZxyVqxMHt24aTWv9xTjf18QyTzMyfDJoUk%2Bnmgi0TlV8kGj5iHTVEo31gN6X47bH56PAY8RCDXhEtB7FPAcHCRMqbkDF0bV01Jevy040aNSpTX2lLAcdJZNHBQUE9l7A1D7T9ABvak24evKVAOTGAPoxUjEAsRJ5NYl5ww9AZ9dRDPQOcxxuTIsnt134v5SqxsZB5NeBr0sJYwpvJUouSktz4qT1lGi6PMKIs%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20260213T005856Z&X-Amz-SignedHeaders=host&X-Amz-Expires=300&X-Amz-Credential=ASIAQ3PHCVTY4L7CZ66Y%2F20260213%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=a2eb4e2c987babf4ac1370852e1ae1acf0136f3729c8804a77e787364dec5d8e&hash=844a60dbf81f8e4c72431320224804bf319d401b1c64ef46d1d5bbf1aaea0be1&host=68042c943591013ac2b2430a89b270f6af2c76d8dfd086a07176afe7c76c2c61&pii=S1877050921015556&tid=spdf-b7b38311-043a-4948-8cb5-f0ac39f16261&sid=cd34f0f76b2ad54fd28851418e66a0350723gxrqa&type=client&tsoh=d3d3LnNjaWVuY2VkaXJlY3QuY29t&rh=d3d3LnNjaWVuY2VkaXJlY3QuY29t&ua=0f1c5c02065f545f5451&rr=9cd0615419eea5cd&cc=us"
+       target="_blank"
+       rel="noopener"
+       class="px-5 py-3 rounded-lg border font-medium">
+      View with ScienceDirect
+    </a>
+  </section>
+
+
+  <!-- Tech stack -->
+  <section class="mb-8">
+    <h2 class="text-xl font-semibold mb-3">Skills and Tools</h2>
+    <ul class="list-disc list-inside text-gray-700 inline-block text-left">
+      <li>YOLOv7</li>
+      <li>Python</li>
+      <li>PyTorch</li>
+      <li>Roboflow</li>
+    </ul>
+  </section>
+
+  <!-- Navigation -->
+  <section class="flex justify-center gap-4">
+    <a href="/projects"
+       class="px-4 py-2 rounded border">
+      Back to Projects
+    </a>
+  </section>
+</main>
