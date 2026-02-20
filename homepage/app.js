@@ -69,6 +69,21 @@ function renderExperience(data) {
   });
 }
 
+function renderEducation(data) {
+  const root = document.getElementById("education");
+  clear(root);
+
+  data.experience.forEach(role => {
+    const header = el("div", {}, [
+      el("h3", { style: "margin:0 0 .25rem 0;" }, [`${role.title} — ${role.org}`]),
+      el("p", { class: "muted", style: "margin:0 0 .5rem 0;" }, [`${role.location} · ${role.dates}`])
+    ]);
+
+    const bullets = el("ul", {}, role.bullets.map(b => el("li", {}, [b])));
+    root.appendChild(el("article", { style: "margin-bottom: 1.5rem;" }, [header, bullets]));
+  });
+}
+
 function renderFooter(data) {
   document.getElementById("footerNote").textContent = data.footer.note;
 
@@ -180,6 +195,7 @@ loadNav();
     renderSummary(data);
     renderSkills(data);
     renderExperience(data);
+    renderEducation(data);
     renderFooter(data);
   } catch (err) {
     console.error(err);

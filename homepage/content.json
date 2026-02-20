@@ -17,9 +17,26 @@
     { "name": "Python", "group": "Languages", "projectIds": ["yolov7-aug", "rule-automation"] },
     { "name": "Java", "group": "Languages", "projectIds": ["portfolio-site"] },
     { "name": "C/C++", "group": "Languages", "projectIds": [] },
-    { "name": "Docker", "group": "Tools", "projectIds": ["stylegan2-ada"] },
+    { "name": "C#", "group": "Languages", "projectIds": [] },
     { "name": "YOLOv7", "group": "Tools", "projectIds": ["yolov7-aug"] },
-    { "name": "Requirements & V&V", "group": "Systems", "projectIds": ["rule-automation"] }
+    { "name": "Requirements & V&V", "group": "Systems", "projectIds": ["rule-automation"] },
+    { "name": "HTML", "group": "Languages", "projectIds": ["portfolio-site", "rule-automation"]},
+    { "name": "CSS", "group":"Languages", "projectIds":["rule-automation", "portfolio-site"]},
+    { "name": "JavaScript", "group":"Languages", "projectIds": ["portfolio-site", "rule-automation"]},
+    { "name": "MATLIB", "group":"Languages", "projectIds": []},
+    { "name": "Assembly", "group":"Languages", "projectIds": []},
+    { "name": "Jira", "group": "Tools", "projectIds": [] },
+    { "name": "Confluence", "group": "Tools", "projectIds": ["yolov7-aug"] },
+    { "name": "Eclipse", "group": "Tools", "projectIds": [] },
+    { "name": "GCC", "group": "Tools", "projectIds": [] },
+    { "name": "Makefile", "group": "Tools", "projectIds": [] },
+    { "name": "Visual Studio Code", "group": "Tools", "projectIds": [] },
+    { "name": "Google Colab", "group": "Tools", "projectIds": [] },
+    { "name": "Git", "group":"Environments", "projectIds":[]},
+    { "name": "Anaconda", "group":"Environments", "projectIds":[]},
+    { "name": "Linux", "group":"Environments", "projectIds":[]},    
+    { "name": "Windows OS", "group":"Environments", "projectIds":[]}
+
   ],
   "experience": [
     {
@@ -28,11 +45,25 @@
       "location": "Newport, RI",
       "dates": "2022 – Present",
       "bullets": [
-        "Support complex software systems where traceability, documentation, and process compliance are critical.",
-        "Lead and support testing and integration across evolving baselines.",
-        "Designed a rule-based automation tool to reduce manual overhead and improve consistency."
+        "Assisted in the development in a rule-based automation tool using JavaScript to recommend strategies for various military missions",
+        "Performed verification and validation testing for system updates, including patch and release testing",
+        "Supported system integration and deployment activities, including on-site installation and operational monitoring",
+        "Created training plans and technical presentations based on program reviews, translating new developments into clear, reusable materials relied upon by team leaders for project briefings"
       ]
     },
+    {
+      "title": "IT and Customer Support Intern",
+      "org": "Regdox",
+      "location": "Nashua, NH",
+      "dates": "2021 – 2022",
+      "bullets": [
+        "Verify daily the system’s status and logs to check for security breaches.",
+        "Test system and application patches and report any problems. Write blogs covering topics on blockchain, metadata, and the zero-day vulnerability with log4j.",
+        "Help customers with login issues, security permission issues, and product questions."
+      ]
+    }
+  ],
+    "education": [
     {
       "title": "Graduate Researcher — Computer Vision",
       "org": "UMass Dartmouth",
@@ -50,28 +81,21 @@
       "name": "Virtual Portfolio",
       "summary": "A minimal personal site with structured content and a skills-to-projects mapping.",
       "links": [{ "label": "Repo", "url": "https://github.com/yourname/virtualportfolio" }],
-      "skills": ["JavaScript", "HTML", "CSS"]
+      "skills": ["JavaScript", "HTML", "CSS (CSS Tailwind)"]
     },
     {
       "id": "yolov7-aug",
-      "name": "YOLOv7 Rash Detection — Augmentation Pipeline",
+      "name": "Optimizing Rash Datasets for Lyme Disease Detection",
       "summary": "Dataset curation + augmentation experiments to improve detection performance.",
       "links": [],
       "skills": ["Python", "YOLOv7", "OpenCV"]
     },
     {
       "id": "rule-automation",
-      "name": "Rule-based Workflow Automation Tool",
-      "summary": "Automated recurring checks and structured outputs to reduce manual work.",
+      "name": "Rule-based Automation Tool",
+      "summary": "Assisted in the development in a rule-based automation tool using JavaScript to recommend strategies for various military mission within the Navy",
       "links": [],
-      "skills": ["Python"]
-    },
-    {
-      "id": "stylegan2-ada",
-      "name": "StyleGAN2-ADA Synthetic Lesions Experiments",
-      "summary": "Early experiments generating synthetic samples for class balancing.",
-      "links": [],
-      "skills": ["Ubuntu", "Python"]
+      "skills": ["HTML", "CSS", "JavaScript"]
     }
   ],
   "footer": {
