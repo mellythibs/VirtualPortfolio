@@ -54,22 +54,25 @@ function el(tag, attrs = {}, children = []) {
 }
 
 // ---------- Sorting ----------
-function parseCreatedYYYYMM(created) {
-  // returns number for sorting or null if invalid/missing
+function parseCreated(created) {
   if (!created || typeof created !== "string") return null;
-  const m = created.match(/^(\d{4})-(\d{2})$/);
+
+  // Accept YYYY-MM or YYYY-MM-DD
+  const m = created.match(/^(\d{4})-(\d{2})(?:-(\d{2}))?$/);
   if (!m) return null;
+
   const year = Number(m[1]);
   const month = Number(m[2]);
-  if (!Number.isFinite(year) || !Number.isFinite(month) || month < 1 || month > 12) return null;
+  if (!Number.isFinite(year) || month < 1 || month > 12) return null;
+
   // sortable numeric (bigger = newer)
   return year * 100 + month;
 }
 
 function sortProjects(list) {
   return [...list].sort((a, b) => {
-    const av = parseCreatedYYYYMM(a.created);
-    const bv = parseCreatedYYYYMM(b.created);
+    const av = parseCreated(a.created);
+    const bv = parseCreated(b.created);
 
     // missing dates go bottom
     if (av === null && bv === null) {

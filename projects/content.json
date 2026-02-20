@@ -21,7 +21,7 @@
     {
       "id": "lyme-detection",
       "slug": "lyme-detection",
-      "name": "Lyme Rash Detection",
+      "name": "Optimizing Rash Datasets for Lyme Disease Detection",
       "summary": "Dataset curation + augmentation experiments to improve detection performance.",
       "skills": [
         "Python",
@@ -33,7 +33,7 @@
         "status": "completed",
         "notes": ""
       },
-      "created": "2025-11",
+      "created": "2026-01",
       "showOnProjectsPage": true
     },
     {
@@ -65,7 +65,7 @@
         "status": "planned",
         "notes": ""
       },
-      "created": "2025-10",
+      "created": "2020-12",
       "showOnProjectsPage": true
     }
   ]
