@@ -1,149 +1,235 @@
-async function loadPosts() {
-  const res = await fetch("./posts.json");
-  if (!res.ok) throw new Error("Failed to load posts.json");
-  return res.json();
+const DATA_URL = "./post.json";
+const pageSize = 10;
+
+let allPosts = [];
+let filteredPosts = [];
+let currentPage = 1;
+let queryText = "";
+
+// Tag filter state
+let appliedTags = new Set();  // tags currently applied to filtering
+let stagedTags = new Set();   // checked tags in dropdown before Apply
+
+function $(id) { return document.getElementById(id); }
+
+function parseCreated(dateStr) {
+  if (!dateStr) return null;
+  const d = new Date(dateStr);
+  return isNaN(d) ? null : d.getTime();
 }
 
-function el(tag, attrs = {}, children = []) {
-  const node = document.createElement(tag);
-  for (const [k, v] of Object.entries(attrs)) {
-    if (k === "class") node.className = v;
-    else if (k.startsWith("on") && typeof v === "function") node.addEventListener(k.slice(2), v);
-    else node.setAttribute(k, v);
-  }
-  for (const child of children) {
-    if (typeof child === "string") node.appendChild(document.createTextNode(child));
-    else if (child) node.appendChild(child);
-  }
-  return node;
+function sortPosts(list) {
+  return [...list].sort((a, b) => {
+    const av = parseCreated(a.date); // NOTE: your JSON uses "date"
+    const bv = parseCreated(b.date);
+    return (bv || 0) - (av || 0);
+  });
 }
-
-function clear(node) { node.innerHTML = ""; }
-function normalize(str) { return (str || "").toLowerCase().trim(); }
 
 function uniqueTags(posts) {
   const set = new Set();
-  posts.forEach(p => (p.tags || []).forEach(t => set.add(t)));
-  return Array.from(set).sort((a, b) => a.localeCompare(b));
+  posts.forEach(p => (p.tags || []).forEach(t => set.add(String(t))));
+  return [...set].sort((a, b) => a.localeCompare(b));
 }
 
-function matchesSearch(post, query) {
-  if (!query) return true;
-  const q = normalize(query);
-  const hay = normalize([post.title, post.summary, ...(post.tags || [])].join(" "));
-  return hay.includes(q);
-}
-
-function matchesTag(post, tag) {
-  if (!tag) return true;
-  return (post.tags || []).includes(tag);
-}
-
-function formatDate(iso) {
-  // bare bones: keep ISO or make it nicer later
-  return iso || "";
-}
-
-function renderTagFilters(tags, selectedTag, onSelect) {
-  const root = document.getElementById("tagFilters");
-  clear(root);
+function renderTagsList(tags) {
+  const wrap = $("skillsList"); // reuse your existing HTML ids
+  wrap.innerHTML = "";
 
   tags.forEach(tag => {
-    const pressed = tag === selectedTag;
-    const pill = el("span", {
-      class: "pill",
-      role: "button",
-      tabindex: "0",
-      "aria-pressed": String(pressed),
-      "aria-label": `Filter by ${tag}`,
-      onclick: () => onSelect(pressed ? null : tag),
-      onkeydown: (e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          onSelect(pressed ? null : tag);
-        }
-      }
-    }, [tag]);
+    const id = `tag_${tag.replace(/\W+/g, "_")}`;
 
-    root.appendChild(pill);
+    const row = document.createElement("div");
+    row.className = "skill-item";
+
+    const cb = document.createElement("input");
+    cb.type = "checkbox";
+    cb.id = id;
+    cb.value = tag;
+    cb.checked = stagedTags.has(tag);
+
+    cb.addEventListener("change", () => {
+      if (cb.checked) stagedTags.add(tag);
+      else stagedTags.delete(tag);
+    });
+
+    const label = document.createElement("label");
+    label.htmlFor = id;
+    label.textContent = tag;
+
+    row.appendChild(cb);
+    row.appendChild(label);
+    wrap.appendChild(row);
   });
 }
 
-function renderMeta(count, total, selectedTag, query) {
-  const meta = document.getElementById("resultsMeta");
+function syncTagCheckboxes() {
+  const wrap = $("skillsList");
+  if (!wrap) return;
+  wrap.querySelectorAll("input[type='checkbox']").forEach(cb => {
+    cb.checked = stagedTags.has(cb.value);
+  });
+}
+
+function openTags() {
+  $("skillsPanel").hidden = false;
+  $("skillsBtn").setAttribute("aria-expanded", "true");
+}
+
+function closeTags() {
+  $("skillsPanel").hidden = true;
+  $("skillsBtn").setAttribute("aria-expanded", "false");
+}
+
+function isTagsOpen() {
+  return !$("skillsPanel").hidden;
+}
+
+function initTagsDropdown() {
+  const btn = $("skillsBtn");
+  const panel = $("skillsPanel");
+  const dropdown = $("skillsDropdown");
+
+  btn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    if (isTagsOpen()) closeTags();
+    else openTags();
+  });
+
+  document.addEventListener("click", (e) => {
+    if (!isTagsOpen()) return;
+    if (!dropdown.contains(e.target)) {
+      // revert staged changes to currently applied
+      stagedTags = new Set(appliedTags);
+      syncTagCheckboxes();
+      closeTags();
+    }
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && isTagsOpen()) {
+      stagedTags = new Set(appliedTags);
+      syncTagCheckboxes();
+      closeTags();
+    }
+  });
+
+  $("skillsResetBtn").addEventListener("click", () => {
+    stagedTags = new Set();
+    syncTagCheckboxes();
+  });
+
+  $("skillsApplyBtn").addEventListener("click", () => {
+    appliedTags = new Set(stagedTags);
+    closeTags();
+    applyFilters();
+  });
+
+  panel.addEventListener("click", (e) => e.stopPropagation());
+}
+
+function renderActiveFiltersText() {
   const parts = [];
-  parts.push(`${count} of ${total} posts`);
-  if (selectedTag) parts.push(`tag: ${selectedTag}`);
-  if (query) parts.push(`search: "${query}"`);
-  meta.textContent = parts.join(" · ");
+  if (queryText.trim()) parts.push(`Search: “${queryText.trim()}”`);
+  if (appliedTags.size) parts.push(`Tags: ${[...appliedTags].join(", ")}`);
+  $("activeFiltersText").textContent = parts.length ? parts.join(" • ") : "";
 }
 
 function renderPosts(posts) {
-  const list = document.getElementById("postsList");
-  clear(list);
+  const list = $("blogList");
+  list.innerHTML = "";
 
   posts.forEach(p => {
-    const localUrl = `./${p.slug}/`; // /blog/<slug>/
-    const tagLine = (p.tags && p.tags.length)
-      ? el("p", { class: "muted", style: "margin:.5rem 0 0 0;" }, ["Tags: ", p.tags.join(", ")])
-      : null;
+    // Your current convention:
+    const url = `./blog_posts/${p.slug}.html`;  // change if you switch to post.html?slug=
 
-    list.appendChild(el("article", { class: "card" }, [
-      el("h2", {}, [el("a", { href: localUrl }, [p.title])]),
-      el("p", { class: "muted", style: "margin:0;" }, [formatDate(p.date)]),
-      el("p", { style: "margin:.5rem 0 0 0;" }, [p.summary || ""]),
-      tagLine
-    ]));
+    const article = document.createElement("article");
+    article.className = "card";
+
+    article.innerHTML = `
+      <h2><a href="${url}">${p.title}</a></h2>
+      <p class="muted">${p.summary || ""}</p>
+      <p class="muted">Published: ${p.date || ""}</p>
+      ${(p.tags && p.tags.length) ? `<p class="muted">Tags: ${p.tags.join(", ")}</p>` : ""}
+    `;
+
+    list.appendChild(article);
   });
+
+  $("resultsMeta").textContent =
+    `${posts.length} post${posts.length === 1 ? "" : "s"} found`;
 }
 
-async function loadNav() {
-  const res = await fetch("/nav.html");
-  if (!res.ok) return;
-  document.getElementById("siteNav").innerHTML = await res.text();
-}
+function applyFilters() {
+  const q = queryText.toLowerCase().trim();
 
-loadNav();
+  filteredPosts = allPosts.filter(p => {
+    // Only published posts (your JSON uses status)
+    if (p.status !== "published") return false;
 
+    // Search title + summary + tags
+    if (q) {
+      const hay = [
+        p.title,
+        p.summary,
+        Array.isArray(p.tags) ? p.tags.join(" ") : ""
+      ].join(" ").toLowerCase();
 
-(async function init() {
-  try {
-    const data = await loadPosts();
-    const allPosts = (data.posts || [])
-      .filter(p => (p.status || "published") === "published") // hide drafts by default
-      .sort((a, b) => (b.date || "").localeCompare(a.date || "")); // newest first
-
-    const tags = uniqueTags(allPosts);
-
-    let selectedTag = null;
-    let query = "";
-
-    const searchInput = document.getElementById("searchInput");
-    const clearBtn = document.getElementById("clearBtn");
-
-    function applyAndRender() {
-      const filtered = allPosts.filter(p => matchesTag(p, selectedTag) && matchesSearch(p, query));
-      renderTagFilters(tags, selectedTag, (nextTag) => { selectedTag = nextTag; applyAndRender(); });
-      renderMeta(filtered.length, allPosts.length, selectedTag, query);
-      renderPosts(filtered);
+      if (!hay.includes(q)) return false;
     }
 
-    searchInput.addEventListener("input", (e) => {
-      query = e.target.value || "";
-      applyAndRender();
-    });
+    // Tag OR logic
+    if (appliedTags.size > 0) {
+      const postTags = new Set((p.tags || []).map(String));
+      let match = false;
+      for (const t of appliedTags) {
+        if (postTags.has(t)) { match = true; break; }
+      }
+      if (!match) return false;
+    }
 
-    clearBtn.addEventListener("click", () => {
-      selectedTag = null;
-      query = "";
-      searchInput.value = "";
-      applyAndRender();
-    });
+    return true;
+  });
 
-    applyAndRender();
-  } catch (err) {
-    console.error(err);
-    document.body.innerHTML =
-      "<main style='max-width:900px;margin:0 auto;padding:2rem;font-family:system-ui'>Failed to load blog posts. Check console.</main>";
-  }
-})();
+  filteredPosts = sortPosts(filteredPosts);
+  renderPosts(filteredPosts);
+  renderActiveFiltersText();
+}
+
+async function loadPosts() {
+  const res = await fetch(DATA_URL);
+  if (!res.ok) throw new Error(`Failed to load ${DATA_URL}`);
+  const data = await res.json();
+
+  allPosts = Array.isArray(data.posts) ? data.posts : [];
+  allPosts = sortPosts(allPosts);
+
+  // Build tag list from published posts only (optional but cleaner)
+  const tags = uniqueTags(allPosts.filter(p => p.status === "published"));
+  renderTagsList(tags);
+
+  appliedTags = new Set();
+  stagedTags = new Set();
+
+  applyFilters();
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  initTagsDropdown();
+
+  $("searchInput").addEventListener("input", e => {
+    queryText = e.target.value;
+    applyFilters();
+  });
+
+  $("clearBtn").addEventListener("click", () => {
+    queryText = "";
+    appliedTags = new Set();
+    stagedTags = new Set();
+    $("searchInput").value = "";
+    syncTagCheckboxes();
+    applyFilters();
+  });
+
+  loadPosts().catch(err => console.error(err));
+});

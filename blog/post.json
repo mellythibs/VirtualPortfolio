@@ -1,22 +1,13 @@
 {
   "posts": [
     {
-      "id": "first-post",
-      "slug": "first-post",
+      "id": "introduction",
+      "slug": "introduction",
       "title": "Building My Portfolio (Bare Bones Start)",
       "date": "2026-01-29",
       "summary": "Holder 1",
       "tags": ["portfolio", "webdev", "learning"],
       "status": "published"
-    },
-    {
-      "id": "second-post",
-      "slug": "second-post",
-      "title": "YOLOv7 Augmentation Notes",
-      "date": "2026-01-28",
-      "summary": "Holder 2",
-      "tags": ["computer-vision", "yolov7", "thesis"],
-      "status": "draft"
     }
   ]
 }

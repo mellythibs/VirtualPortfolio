@@ -31,11 +31,10 @@
     { "name": "GCC", "group": "Tools", "projectIds": [] },
     { "name": "Makefile", "group": "Tools", "projectIds": [] },
     { "name": "Visual Studio Code", "group": "Tools", "projectIds": [] },
-    { "name": "Google Colab", "group": "Tools", "projectIds": [] },
     { "name": "Git", "group":"Environments", "projectIds":[]},
     { "name": "Anaconda", "group":"Environments", "projectIds":[]},
     { "name": "Linux", "group":"Environments", "projectIds":[]},    
-    { "name": "Windows OS", "group":"Environments", "projectIds":[]}
+    { "name": "Confluence", "group":"Tools", "projectIds":[]}
 
   ],
   "experience": [
